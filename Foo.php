@@ -16,8 +16,10 @@ if (!function_exists('fo')) {
 			if ($title !== null) {
 				echo '<strong>' . $title . ' :</strong> ';
 			}
-				
-			echo $bar . "</p>";
+
+			if (is_bool($bar)) echo ($bar) ? 'true' : 'false'; else echo $bar;
+
+			echo "</p>";
 		}
 		elseif(is_array($bar) || is_object($bar)) {
 			if ($title !== null) {
@@ -110,7 +112,7 @@ if (!function_exists('foo')) {
 		
 		// setup title based on object type
 
-		$title = (is_null($title)) ? ucfirst(gettype($bar)) : $title . ' - ' . ucfirst(gettype($bar));
+		$title = (is_null($title)) ?  @get_class($bar) . ' ' . ucfirst(gettype($bar)) : $title . ' - ' . ucfirst(gettype($bar));
 
 		switch (gettype($bar)) {
 			case 'string':
